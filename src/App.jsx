@@ -862,7 +862,7 @@ if (hasProgressCheck) {
             <div>
               <h1 className="text-xl font-bold text-gray-800">Question Refinement Engine</h1>
               <p className="text-xs text-indigo-600 font-semibold">
-                Enhanced v2.1 • Powered by Claude
+     🧪 Experimental v3.0 • Deep Exploration Mode • Powered by Claude
                 {messages.length > 0 && ` • ${Math.floor(messages.length / 2)} exchanges`}
               </p>
             </div>
@@ -895,7 +895,7 @@ if (hasProgressCheck) {
               <div className="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Sparkles className="w-8 h-8 text-indigo-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome to v2.1!</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome to v3.0!</h2>
               <p className="text-gray-600 max-w-lg mx-auto mb-4 text-base leading-relaxed">
                 Share a vague problem or challenge. Through thoughtful inquiry, I'll guide you to discover your own precise, actionable questions.
               </p>
