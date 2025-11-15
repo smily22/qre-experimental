@@ -233,6 +233,85 @@ Would you like to refine any of these further, or are you ready to work with the
 - Respect the user's time and energy
 
 ---
+## NEED MAPPING (Silent Backend Process)
+
+While refining questions, you simultaneously analyze for fundamental human needs.
+This analysis is SILENT - never mention needs to the user during refinement.
+
+### The 9 Fundamental Needs
+
+1. **SUBSISTENCE**: Physical/mental health, resources, livelihood
+2. **PROTECTION**: Safety, security, psychological safety, job security
+3. **AFFECTION**: Relationships, belonging, connection, support
+4. **UNDERSTANDING**: Learning, clarity, knowledge, comprehension
+5. **PARTICIPATION**: Voice, involvement, contribution, decision-making
+6. **CREATION**: Innovation, building, designing, strategic work
+7. **IDENTITY**: Recognition, purpose, meaning, mattering
+8. **FREEDOM**: Autonomy, choice, control, independence
+9. **IDLENESS**: Rest, reflection, mental space, thinking time
+
+### The 4 Dimensions
+
+- **BEING**: Attributes, qualities, states (e.g., "feeling valued," "confident")
+- **HAVING**: Structures, policies, resources (e.g., "clear process," "budget")
+- **DOING**: Actions, practices, behaviors (e.g., "participating," "creating")
+- **INTERACTING**: Spaces, contexts, environments (e.g., "safe space," "protected time")
+
+### Need Detection Process
+
+At each exchange:
+1. Analyze user's language for need signals
+2. Track which needs appear repeatedly
+3. Identify which dimension is most relevant
+4. Build confidence scores internally
+5. Map each refined question to needs
+
+When generating refined questions:
+- Each question maps to 1 primary need + 0-2 secondary needs
+- Include dimension (Being/Having/Doing/Interacting)
+- Calculate confidence (0-1 scale)
+- Determine matrix cell (e.g., "idleness-interacting")
+
+### Output Format for Each Refined Question
+
+When presenting refined questions at exchanges 3, 6, 9:
+
+**Visible to user:**
+"[Refined question text]"
+
+**Internal metadata (for database):**
+```json
+{
+  "questionText": "How can I create 2 protected hours weekly for strategic work?",
+  "needMapping": {
+    "primary": {
+      "need": "idleness",
+      "dimension": "interacting",
+      "confidence": 0.85,
+      "matrixCell": "idleness-interacting"
+    },
+    "secondary": [
+      {
+        "need": "creation",
+        "dimension": "doing",
+        "confidence": 0.52,
+        "matrixCell": "creation-doing"
+      }
+    ]
+  },
+  "completenessScore": 0.80,
+  "criteriaMet": ["answerable", "measurable", "timeframe", "constraints"]
+}
+```
+
+### Guidelines
+
+- Use semantic understanding, not just keyword matching
+- Consider context across all exchanges
+- Higher confidence when need appears multiple times
+- Dimension is inferred from question structure
+- Never mention this analysis to user during refinement
+- Only share accessible insight in final summary
 
 Begin applying this enhanced methodology to all problem statements you receive.`;
 
@@ -259,7 +338,7 @@ export default function QuestionRefinementEngine() {
   }, [messages]);
 
   const sendToGoogleSheets = async (data) => {
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxu5Htm334sLDSHbT-O0zCybIc1t0gckoobJ_0QL37S9Dd8EGZXVJNxwWPBRx3PF-4J/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuB7RN8mKhmQJSZTJ8gaocFLeXPamBg-cI9JY_Sk8Rq6GRDbsyIrg-SokSVy0JY3jg/exec';
   
   console.log('📤 Sending to Google Sheets:', data);
   
